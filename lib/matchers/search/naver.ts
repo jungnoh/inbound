@@ -7,7 +7,7 @@ const naver: Matcher = async (href, referrer) => {
       type: 'search',
       engine: 'naver'
     };
-    const query = qs.parse(referrer.query).query;
+    const query = qs.parse(referrer.query ?? '').query;
     if (query) {
       description.query = query as string;
     }

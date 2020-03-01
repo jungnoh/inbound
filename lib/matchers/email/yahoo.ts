@@ -7,6 +7,9 @@ const yahoo: Matcher = async (href, referrer) => {
   }
 
   const domain = parseDomain(referrer.href);
+  if (!domain) {
+    return null;
+  }
   if (domain.domain === "yahoo" && domain.subdomain.indexOf("mail") !== -1) {
     return {
       type: 'email',

@@ -12,7 +12,7 @@ const google: Matcher = async (href, referrer) => {
       type: 'ad',
       network: 'google'
     };
-    const query = qs.parse(referrer.query).q;
+    const query = qs.parse(referrer.query ?? '').q;
     if (query) {
       description.query = query as string;
     }    

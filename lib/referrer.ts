@@ -32,6 +32,9 @@ async function parseReferrer(href: UrlWithStringQuery, referrer: UrlWithStringQu
       }
     } catch {}
   }
+  return {
+    type: 'unknown'
+  }
 };
 
 const CAMPAIGN_KEY_MAP = {
@@ -43,14 +46,14 @@ const CAMPAIGN_KEY_MAP = {
 };
 
 async function parseCampaign(href: UrlWithStringQuery, referrer: UrlWithStringQuery): Promise<Partial<Campaign>> {
-  const query = qs.parse(href.query);
+  const query = qs.parse(href.query ?? '');
   const campaign: Partial<Campaign> = {};
   
-  Object.keys(CAMPAIGN_KEY_MAP).forEach((key) => {
-    if (key in query) {
-      campaign[CAMPAIGN_KEY_MAP[key]] = campaign[key];
-    }
-  });
-
-  return Object.keys(campaign).length > 0 ? campaign : null;
+  return {
+    campaign: (query['utm_campaign'] as string) ?? undefined,
+    source: (query['utm_source'] as string) ?? undefined,
+    term: (query['utm_term'] as string) ?? undefined,
+    medium: (query['utm_medium'] as string) ?? undefined,
+    content: (query['utm_count'] as string) ?? undefined,
+  }
 };

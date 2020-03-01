@@ -10,7 +10,7 @@ const yahoo: Matcher = async (href, referrer) => {
       type: 'ad',
       network: 'yahoo'
     };
-    const query = qs.parse(referrer.query).p;
+    const query = qs.parse(referrer.query ?? '').p;
     if (query) {
       description.query = query as string;
     }

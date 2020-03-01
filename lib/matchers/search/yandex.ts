@@ -7,7 +7,7 @@ const yandex: Matcher = async (href, referrer) => {
       type: 'search',
       engine: 'yandex'
     };
-    const query = qs.parse(referrer.query).text;
+    const query = qs.parse(referrer.query ?? '').text;
     if (query) {
       description.query = query as string;
     }

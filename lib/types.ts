@@ -38,7 +38,11 @@ interface Social {
   network: string;
 }
 
-export type Referrer = Ad | Direct | Link | Internal | Email | Search;
+interface Unknown {
+  type: 'unknown';
+}
+
+export type Referrer = Ad | Direct | Link | Internal | Email | Search | Social | Unknown;
 
 export interface Campaign {
   campaign: string;

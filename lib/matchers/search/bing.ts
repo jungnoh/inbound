@@ -4,7 +4,7 @@ import { Matcher, Referrer } from '../../types';
 const bing: Matcher = async (href, referrer) => {
   if (referrer.host && referrer.host.indexOf('bing.com') !== -1) {
     const description: Referrer = { type: 'search', engine: 'bing' };
-    const query = qs.parse(referrer.query).q;
+    const query = qs.parse(referrer.query ?? '').q;
     if (query) {
       description.query = query as string;
     }

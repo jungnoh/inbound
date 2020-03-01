@@ -7,7 +7,7 @@ const baidu: Matcher = async (href, referrer) => {
       type: 'search',
       engine: 'baidu'
     };
-    const query = qs.parse(referrer.query).wd;
+    const query = qs.parse(referrer.query ?? '').wd;
     if (query) description.query = query as string;
     return description;
   } else {

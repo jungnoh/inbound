@@ -8,12 +8,15 @@ const yahoo: Matcher = async (href, referrer) => {
   }
   
   const domain = parseDomain(referrer.href);
+  if (!domain) {
+    return null;
+  }
   if (domain.domain === "yahoo" && domain.subdomain.indexOf("search") !== -1) {
     const description: Referrer = {
       type: 'search',
       engine: 'yahoo'
     };
-    const query = qs.parse(referrer.query).p;
+    const query = qs.parse(referrer.query ?? '').p;
     if (query) {
       description.query = query as string;
     }

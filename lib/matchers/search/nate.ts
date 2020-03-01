@@ -7,7 +7,7 @@ const nate: Matcher = async (href, referrer) => {
       type: 'search',
       engine: 'nate'
     };
-    const query = qs.parse(referrer.query).q;
+    const query = qs.parse(referrer.query ?? '').q;
     if (query) {
       description.query = query as string;
     }
